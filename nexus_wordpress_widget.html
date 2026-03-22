@@ -1,0 +1,446 @@
+<!-- ============================================================
+     NEXUS — Diagrama Interativo
+     Cole este bloco inteiro em um bloco "HTML Personalizado"
+     no editor do WordPress (Gutenberg ou Clássico).
+     Não requer plugins, iframes ou acesso ao servidor.
+     ============================================================ -->
+
+<div id="nexus-dgm-root">
+  <div id="nexus-dgm-header">
+    <span id="nexus-dgm-logo">NEXUS</span>
+    <span id="nexus-dgm-sub">Núcleo de Estudos Críticos sobre Experiência, Cultura e Significado</span>
+    <span id="nexus-dgm-tag">UECE · Centro de Humanidades</span>
+  </div>
+  <div id="nexus-dgm-body">
+    <div id="nexus-dgm-svg-wrap">
+      <svg id="nexus-dgm-svg" viewBox="0 0 950 660" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p id="nexus-dgm-hint">Clique em qualquer nó para explorar</p>
+    </div>
+    <aside id="nexus-dgm-panel">
+      <p id="ndp-tag">Sobre o laboratório</p>
+      <h3 id="ndp-title">NEXUS</h3>
+      <div id="ndp-bar"></div>
+      <p id="ndp-desc">Núcleo de Estudos Críticos sobre Experiência, Cultura e Significado</p>
+      <div id="ndp-body">
+        <p>Laboratório de natureza mista (ensino, pesquisa e extensão), vinculado ao Centro de Humanidades da UECE.</p>
+        <ul id="ndp-list">
+          <li>Abordagem interdisciplinar e crítica dos processos psicológicos</li>
+          <li>Interfaces entre experiência subjetiva, cultura e significação</li>
+          <li>Foco especial no contexto brasileiro e latino-americano</li>
+          <li>Metodologias qualitativas com perspectiva epistemológica</li>
+          <li>Comprometimento com a justiça social e práticas emancipatórias</li>
+        </ul>
+      </div>
+      <p id="ndp-footer">Clique em qualquer nó do diagrama para explorar os pilares, fundamentos e eixos de pesquisa do NEXUS.</p>
+    </aside>
+  </div>
+</div>
+
+<style>
+/* ── All styles scoped to #nexus-dgm-root to avoid theme conflicts ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+#nexus-dgm-root {
+  --ndg-bg:      #0A0E18;
+  --ndg-bg2:     #111827;
+  --ndg-gold:    #E8B84B;
+  --ndg-teal:    #4ECDC4;
+  --ndg-blue:    #7B8CDE;
+  --ndg-coral:   #FF6B6B;
+  --ndg-text:    #E8E6DF;
+  --ndg-muted:   #8A8880;
+  --ndg-border:  rgba(255,255,255,0.08);
+  --ndg-accent:  #E8B84B;
+
+  font-family: 'Lora', Georgia, serif;
+  background: var(--ndg-bg);
+  color: var(--ndg-text);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  max-width: 1100px;
+  margin: 2rem auto;
+  box-sizing: border-box;
+}
+#nexus-dgm-root *, #nexus-dgm-root *::before, #nexus-dgm-root *::after {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+
+/* Header */
+#nexus-dgm-header {
+  padding: 22px 32px 18px;
+  border-bottom: 1px solid var(--ndg-border);
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(232,184,75,0.04);
+}
+#nexus-dgm-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ndg-gold);
+  text-shadow: 0 0 32px rgba(232,184,75,0.4);
+  flex-shrink: 0;
+}
+#nexus-dgm-sub {
+  font-size: 0.8rem;
+  color: var(--ndg-muted);
+  font-style: italic;
+  flex: 1;
+  min-width: 180px;
+}
+#nexus-dgm-tag {
+  font-size: 0.7rem;
+  color: var(--ndg-muted);
+  border: 1px solid var(--ndg-border);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Body layout */
+#nexus-dgm-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  min-height: 520px;
+}
+@media (max-width: 820px) {
+  #nexus-dgm-body { grid-template-columns: 1fr; }
+  #nexus-dgm-panel { border-left: none !important; border-top: 1px solid var(--ndg-border); }
+}
+
+/* SVG wrap */
+#nexus-dgm-svg-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+}
+#nexus-dgm-svg-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 50% at 50% 48%, rgba(232,184,75,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+#nexus-dgm-svg {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  overflow: visible;
+}
+#nexus-dgm-hint {
+  font-size: 0.72rem;
+  color: var(--ndg-muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: 8px;
+  opacity: 0.6;
+}
+
+/* SVG node interactions */
+#nexus-dgm-root .ndg-node { cursor: pointer; }
+#nexus-dgm-root .ndg-circle {
+  transition: filter 0.2s;
+}
+#nexus-dgm-root .ndg-node:hover .ndg-circle,
+#nexus-dgm-root .ndg-node.ndg-active .ndg-circle {
+  filter: brightness(1.3);
+}
+#nexus-dgm-root .ndg-pulse {
+  animation: ndg-pulse 2.8s ease-out infinite;
+}
+@keyframes ndg-pulse {
+  0%   { opacity: 0.5; r: 62; }
+  100% { opacity: 0;   r: 90; }
+}
+
+/* Info panel */
+#nexus-dgm-panel {
+  border-left: 1px solid var(--ndg-border);
+  background: rgba(17,24,39,0.98);
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+}
+#nexus-dgm-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--ndg-accent);
+  transition: background 0.35s;
+}
+#ndp-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ndg-accent);
+  margin-bottom: 10px;
+  transition: color 0.35s;
+  font-family: 'Lora', serif;
+}
+#ndp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ndg-text);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+#ndp-bar {
+  width: 36px; height: 2px;
+  background: var(--ndg-accent);
+  margin-bottom: 16px;
+  transition: background 0.35s;
+}
+#ndp-desc {
+  font-size: 0.87rem;
+  font-style: italic;
+  color: rgba(232,230,223,0.75);
+  margin-bottom: 18px;
+  line-height: 1.65;
+  font-family: 'Lora', serif;
+}
+#ndp-body {
+  font-size: 0.84rem;
+  color: rgba(232,230,223,0.7);
+  line-height: 1.75;
+  font-family: 'Lora', serif;
+}
+#ndp-list {
+  list-style: none;
+  margin-top: 14px;
+}
+#ndp-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ndg-border);
+  display: flex;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(232,230,223,0.78);
+  line-height: 1.5;
+  font-family: 'Lora', serif;
+}
+#ndp-list li::before {
+  content: '→';
+  color: var(--ndg-accent);
+  font-size: 0.78rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: color 0.35s;
+}
+#ndp-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 0.7rem;
+  color: var(--ndg-muted);
+  font-style: italic;
+  border-top: 1px solid var(--ndg-border);
+  font-family: 'Lora', serif;
+}
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── NODE DATA ── */
+  var ND = {
+    nexus: { tag:'Centro', title:'NEXUS', desc:'Núcleo de Estudos Críticos sobre Experiência, Cultura e Significado', body:'Laboratório de natureza mista (ensino, pesquisa e extensão), vinculado ao Centro de Humanidades da UECE. Investiga as conexões entre experiência subjetiva, cultura e significação e seus desdobramentos na saúde mental, no desenvolvimento humano e nas relações sociais.', list:['Foco no contexto brasileiro e latino-americano','Abordagem interdisciplinar e crítica','Tradição fenomenológica, histórico-cultural e decolonial','Metodologias qualitativas com rigor epistemológico','Compromisso com justiça social e práticas emancipatórias'], accent:'#E8B84B' },
+    pilares: { tag:'Estrutura', title:'Pilares do Laboratório', desc:'O NEXUS organiza-se em torno dos três pilares do ensino superior', body:'As atividades do NEXUS articulam de forma integrada e crítica o ensino, a pesquisa e a extensão, recusando a separação entre produção de conhecimento, formação e intervenção social.', list:['Ensino: grupos de estudos, monitoria e disciplinas','Pesquisa: histórico-epistemológica, básica e aplicada','Extensão: formação de profissionais e ações comunitárias','Articulação contínua entre teoria, clínica e crítica','Compromisso com a formação integral do estudante'], accent:'#4ECDC4' },
+    ensino: { tag:'Pilar · Ensino', title:'Ensino', desc:'Formação crítica e reflexiva de estudantes de Psicologia', body:'O NEXUS desenvolve atividades de ensino articuladas com as disciplinas do curso de Psicologia da UECE, promovendo aprofundamento teórico-metodológico e incentivo à docência.', list:['Grupos de estudos quinzenais e semanais','Monitoria acadêmica remunerada e voluntária','Disciplinas optativas (Psicologia e Questões Étnico-Raciais)','Seminários de formação teórica e metodológica','Integração com as disciplinas de extensão do PPC'], accent:'#4ECDC4' },
+    pesquisa: { tag:'Pilar · Pesquisa', title:'Pesquisa', desc:'Investigação histórico-epistemológica, básica e aplicada', body:'As pesquisas do NEXUS exploram as conexões entre experiência, cultura e significação, com ênfase em perspectivas fenomenológicas, críticas e decoloniais. São privilegiadas metodologias qualitativas.', list:['Pesquisas teórico-conceituais (método PICT)','Pesquisas empíricas qualitativas (IPA, análise temática)','Iniciação Científica com bolsas PIBIC/BIC','Orientação de TCC com qualidade para publicação','Submissão de projetos a editais CNPq e FUNCAP'], accent:'#4ECDC4' },
+    extensao: { tag:'Pilar · Extensão', title:'Extensão', desc:'Formação crítica e intervenção junto à comunidade', body:'O NEXUS promove ações de extensão voltadas à formação de profissionais de saúde mental e ao desenvolvimento de relações humanas mais emancipatórias, com especial atenção à população negra.', list:['Minicursos, simpósios e colóquios temáticos','Formações antirracistas para profissionais do SUS','Projeto "Aquilombação da RAPS" de Fortaleza','Cursos sobre psiquiatria anticolonial (Fanon)','Parcerias com movimentos sociais e ONGs'], accent:'#4ECDC4' },
+    fundamentos: { tag:'Matrizes Teóricas', title:'Fundamentos Teóricos', desc:'Tradições que sustentam as investigações do NEXUS', body:'O NEXUS ancora-se em matrizes teóricas que recusam separar mente, corpo, cultura e história. Essas tradições orientam tanto a pesquisa epistemológica quanto as práticas clínicas e extensionistas.', list:['Fenomenologia crítica (Husserl, Merleau-Ponty, Zahavi)','Psicologia histórico-cultural (Vygotsky, Wagoner, Boesch)','Cognição 4E: enativa, encorporada, estendida, embutida','Semiótica e produção cultural de significado','Perspectivas decoloniais e feministas negras'], accent:'#7B8CDE' },
+    fenomenologia: { tag:'Fundamento Teórico', title:'Fenomenologia Crítica', desc:'Investigação rigorosa das estruturas da experiência vivida', body:'A fenomenologia, desde sua fundação husserliana, propõe investigação rigorosa da experiência. Em Merleau-Ponty, o corpo emerge como locus da percepção e do significado. Abordagens contemporâneas (Zahavi, Gallagher, Fuchs) a articulam com as ciências cognitivas.', list:['Husserl e a crise das ciências europeias','Merleau-Ponty e a fenomenologia do corpo','Zahavi: intersubjetividade, empatia e vergonha','Fenomenologia e psicopatologia (Tatossian)','IPA e microfenomenologia como métodos de pesquisa'], accent:'#7B8CDE' },
+    hist_cultural: { tag:'Fundamento Teórico', title:'Psicologia Histórico-Cultural', desc:'A mente como constituída na e pela cultura e pela história', body:'A psicologia cultural dinâmica (Wagoner, Valsiner, Boesch) concebe a cultura como constitutiva dos processos psicológicos. A mente se forma na mediação simbólica, nas práticas sociais e na história.', list:['Vygotsky e a mediação semiótica','Wagoner: transformação simbólica e memória','Boesch: psicologia cultural e significado pessoal','Psicologia cultural dinâmica contemporânea','Cognição, cultura e desenvolvimento humano'], accent:'#7B8CDE' },
+    cognicao: { tag:'Fundamento Teórico', title:'Cognição 4E', desc:'Mente enativa, encorporada, estendida e embutida', body:'As abordagens 4E (Varela, Thompson & Rosch; Gallagher; Clark) propõem que mente, corpo e ambiente são inseparáveis. A cognição emerge da interação dinâmica do organismo com o mundo.', list:['Varela, Thompson & Rosch: The Embodied Mind','Gallagher: cognição enativa e encorporada','Clark: ser-no-mundo e cognição estendida','Noë: percepção como atividade','Fuchs: ecologia do cérebro e mente relacional'], accent:'#7B8CDE' },
+    semiotica: { tag:'Fundamento Teórico', title:'Semiótica e Cultura', desc:'Processos de produção de sentido em contextos culturais', body:'A semiótica oferece ferramentas para analisar como signos e símbolos medeiam a experiência humana e constituem práticas culturais. Articula-se com a psicologia histórico-cultural e a antropologia médica.', list:['Análise dos processos de significação','Simbolismo cultural e transformação psíquica','Semiótica e construção do Outro','Narrativas, cultura e sofrimento psíquico','Psicolinguística histórico-cultural'], accent:'#7B8CDE' },
+    decolonial: { tag:'Fundamento Teórico', title:'Perspectivas Decoloniais', desc:'Questionamento das premissas coloniais da Psicologia', body:'O pensamento decolonial (Fanon, Maldonado-Torres) articulado ao feminismo negro brasileiro (Gonzalez, Carneiro, Kilomba) fornece ferramentas críticas para questionar categorias psicológicas e psiquiátricas coloniais.', list:['Fanon: colonialidade, raça e subjetividade','Lélia Gonzalez: amefricanidade e feminismo','Sueli Carneiro: epistemicídio e saúde mental','Kilomba: trauma racial e epistemologia negra','Descolonização das práticas psicológicas'], accent:'#7B8CDE' },
+    eixos: { tag:'Pesquisa', title:'Eixos Temáticos', desc:'Três grandes eixos de investigação interdisciplinar', body:'As pesquisas do NEXUS organizam-se em três eixos que articulam teoria, clínica e crítica cultural, dialogando com as tradições fenomenológica, humanista-existencial e decolonial.', list:['Eixo 1: Fenomenologia, Epistemologia e Cognição Cultural','Eixo 2: Psicopatologia, Cultura e Saúde Mental Crítica','Eixo 3: Psicoterapias Humanistas-Existenciais, Racismo e Diversidade','Leituras em três níveis: Iniciante, Intermediário e Maduro','Obras em português e inglês'], accent:'#FF6B6B' },
+    eixo1: { tag:'Eixo Temático 1', title:'Fenomenologia, Epistemologia e Cognição Cultural', desc:'Fundamentos filosóficos e epistemológicos da Psicologia', body:'Investiga as bases filosóficas da Psicologia a partir da fenomenologia, das abordagens enativistas/encorporadas e da psicologia cultural dinâmica. Foco em ontologia da percepção, cognição situada e cultura como constituinte da mente.', list:['Merleau-Ponty, Husserl, Zahavi e Gallagher','Varela, Thompson & Rosch: The Embodied Mind','Wagoner & Carriere: Where Culture and Mind Meet','50 Concepts for a Critical Phenomenology','Metodologia: IPA, microfenomenologia e PICT'], accent:'#FF6B6B' },
+    eixo2: { tag:'Eixo Temático 2', title:'Psicopatologia, Cultura e Saúde Mental Crítica', desc:'Sofrimento psíquico em perspectiva cultural e crítica', body:'Articula psicopatologia fenomenológica, antropologia médica e psiquiatria cultural crítica. Examina como fatores culturais, históricos e políticos moldam as experiências de sofrimento e questiona categorias diagnósticas hegemônicas.', list:['Kleinman: psiquiatria cultural e explanatory models','BPS Power Threat Meaning Framework','Foucault: história da loucura','Biehl, Scheper-Hughes: etnografia do sofrimento no Brasil','Reforma psiquiátrica e atenção psicossocial'], accent:'#FF6B6B' },
+    eixo3: { tag:'Eixo Temático 3', title:'Psicoterapias Humanistas-Existenciais, Racismo e Diversidade', desc:'Clínica humanista-existencial e práticas antirracistas', body:'Articula as tradições humanistas-existenciais (Rogers, May, Schneider, Bugental) com o campo das relações étnico-raciais, das microagressões e do racismo estrutural. Desenvolve modelos de prática clínica culturalmente sensíveis.', list:['Sue & Sue: Counseling the Culturally Diverse','Kilomba: trauma racial e prática clínica','Hoffman et al.: humanismo e multiculturalismo','Sue & Spanierman: microagressões','Fanon, Gordon: colonialidade e psicoterapia'], accent:'#FF6B6B' }
+  };
+
+  /* ── SVG DEFINITION ── */
+  var svgNS = 'http://www.w3.org/2000/svg';
+
+  function mkEl(tag, attrs, parent) {
+    var el = document.createElementNS(svgNS, tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(el);
+    return el;
+  }
+  function mkText(tag, attrs, text, parent) {
+    var el = mkEl(tag, attrs, parent);
+    el.textContent = text;
+    return el;
+  }
+
+  var svg = document.getElementById('nexus-dgm-svg');
+
+  /* Defs */
+  var defs = mkEl('defs', {}, svg);
+  function mkFilter(id, blur) {
+    var f = mkEl('filter', { id: id, x:'-40%', y:'-40%', width:'180%', height:'180%' }, defs);
+    var gb = mkEl('feGaussianBlur', { stdDeviation: blur, result: 'b' }, f);
+    var fm = mkEl('feMerge', {}, f);
+    mkEl('feMergeNode', { in: 'b' }, fm);
+    mkEl('feMergeNode', { in: 'SourceGraphic' }, fm);
+  }
+  function mkRadGrad(id, c1, c2) {
+    var g = mkEl('radialGradient', { id: id, cx:'38%', cy:'32%', r:'68%' }, defs);
+    mkEl('stop', { offset:'0%', 'stop-color': c1 }, g);
+    mkEl('stop', { offset:'100%', 'stop-color': c2 }, g);
+  }
+  mkFilter('ndg-glow-g', 9);
+  mkFilter('ndg-glow-sm', 5);
+  mkRadGrad('ndg-gg', '#F5D070', '#8A6010');
+  mkRadGrad('ndg-gt', '#6EDDD5', '#1A6B66');
+  mkRadGrad('ndg-gb', '#9AAAE8', '#2A3A9A');
+  mkRadGrad('ndg-gc', '#FF9090', '#902020');
+  mkRadGrad('ndg-gts', '#5ECEC6', '#1A5E5A');
+  mkRadGrad('ndg-gbs', '#8A9BD8', '#253080');
+  mkRadGrad('ndg-gcs', '#FF8080', '#862020');
+
+  /* Background grid */
+  function gridCircle(r) {
+    mkEl('circle', { cx:475, cy:335, r:r, fill:'none', stroke:'rgba(255,255,255,0.04)', 'stroke-width':1 }, svg);
+  }
+  gridCircle(160); gridCircle(270); gridCircle(380);
+
+  /* ── CONNECTIONS ── */
+  function conn(d, stroke, w, dash) {
+    var el = mkEl('path', { d:d, fill:'none', stroke:stroke, 'stroke-width':w||2, 'stroke-linecap':'round', opacity:0.5 }, svg);
+    if (dash) el.setAttribute('stroke-dasharray', dash);
+  }
+  /* hub connections */
+  conn('M475,335 Q490,240 475,148', '#4ECDC4', 2);
+  conn('M475,335 Q570,375 635,425', '#7B8CDE', 2);
+  conn('M475,335 Q375,375 315,425', '#FF6B6B', 2);
+  /* pilares sub */
+  conn('M475,148 Q440,105 385,65',  '#4ECDC4', 1.2);
+  conn('M475,148 Q475,100 475,45',  '#4ECDC4', 1.2);
+  conn('M475,148 Q510,105 565,65',  '#4ECDC4', 1.2);
+  /* fundamentos sub */
+  conn('M635,425 Q700,365 775,305', '#7B8CDE', 1.2);
+  conn('M635,425 Q725,415 820,410', '#7B8CDE', 1.2);
+  conn('M635,425 Q720,475 795,520', '#7B8CDE', 1.2);
+  conn('M635,425 Q685,505 710,565', '#7B8CDE', 1.2);
+  conn('M635,425 Q645,500 640,535', '#7B8CDE', 1.2);
+  /* eixos sub */
+  conn('M315,425 Q245,370 168,318', '#FF6B6B', 1.2);
+  conn('M315,425 Q230,430 138,430', '#FF6B6B', 1.2);
+  conn('M315,425 Q250,490 178,545', '#FF6B6B', 1.2);
+
+  /* ── NODE BUILDER ── */
+  function makeNode(key, cx, cy, r, grad, glow, lines) {
+    var g = mkEl('g', { class:'ndg-node', 'data-node':key, tabindex:0, role:'button' }, svg);
+    var circle = mkEl('circle', { cx:cx, cy:cy, r:r, fill:'url(#'+grad+')', stroke:'rgba(255,255,255,0.18)', 'stroke-width':1.5, class:'ndg-circle' }, g);
+    if (glow) circle.setAttribute('filter', 'url(#'+glow+')');
+
+    var lineH = r * 0.38;
+    var startY = cy - (lines.length - 1) * lineH / 2;
+    lines.forEach(function(ln, i) {
+      mkText('text', {
+        x: cx, y: startY + i * lineH,
+        'font-family': "'Lora', Georgia, serif",
+        'font-size': ln.size || (r > 45 ? 11 : 9),
+        'font-weight': i === 0 ? 700 : 400,
+        'font-style': i > 0 ? 'italic' : 'normal',
+        fill: i === 0 ? '#fff' : 'rgba(255,255,255,0.82)',
+        'text-anchor':'middle',
+        'dominant-baseline':'central',
+        'pointer-events':'none'
+      }, ln.t, g);
+    });
+    g.addEventListener('click', function() { updatePanel(key); });
+    g.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); updatePanel(key); }
+    });
+    return g;
+  }
+
+  /* pulse ring on center */
+  mkEl('circle', { cx:475, cy:335, r:62, fill:'none', stroke:'rgba(232,184,75,0.3)', 'stroke-width':1.5, class:'ndg-pulse' }, svg);
+
+  /* ── BUILD ALL NODES ── */
+  /* Center */
+  makeNode('nexus', 475, 335, 62, 'ndg-gg', 'ndg-glow-g', [
+    { t:'NEXUS', size:17 },
+    { t:'Experiência · Cultura · Significado', size:7.5 },
+    { t:'UECE — Centro de Humanidades', size:6.5 }
+  ]);
+
+  /* Hub: Pilares */
+  makeNode('pilares', 475, 148, 42, 'ndg-gt', 'ndg-glow-sm', [{ t:'PILARES', size:11 }, { t:'do Laboratório', size:9 }]);
+  /* Pilares sub */
+  makeNode('ensino',   385, 65, 30, 'ndg-gts', null, [{ t:'Ensino', size:10 }]);
+  makeNode('pesquisa', 475, 45, 30, 'ndg-gts', null, [{ t:'Pesquisa', size:10 }]);
+  makeNode('extensao', 565, 65, 30, 'ndg-gts', null, [{ t:'Extensão', size:10 }]);
+
+  /* Hub: Fundamentos */
+  makeNode('fundamentos', 635, 425, 44, 'ndg-gb', 'ndg-glow-sm', [{ t:'FUNDAMENTOS', size:10.5 }, { t:'Teóricos', size:9 }]);
+  /* Fundamentos sub */
+  makeNode('fenomenologia', 775, 305, 31, 'ndg-gbs', null, [{ t:'Fenomenologia', size:8.5 }, { t:'Crítica', size:7.5 }]);
+  makeNode('hist_cultural',  820, 410, 31, 'ndg-gbs', null, [{ t:'Psic. Hist.-', size:8.5 }, { t:'Cultural', size:7.5 }]);
+  makeNode('cognicao',       795, 520, 29, 'ndg-gbs', null, [{ t:'Cognição', size:8.5 }, { t:'4E', size:7.5 }]);
+  makeNode('semiotica',      710, 565, 29, 'ndg-gbs', null, [{ t:'Semiótica', size:8.5 }, { t:'e Cultura', size:7.5 }]);
+  makeNode('decolonial',     640, 535, 29, 'ndg-gbs', null, [{ t:'Perspectivas', size:8 }, { t:'Decoloniais', size:7.5 }]);
+
+  /* Hub: Eixos */
+  makeNode('eixos', 315, 425, 42, 'ndg-gc', 'ndg-glow-sm', [{ t:'EIXOS', size:11 }, { t:'Temáticos', size:9 }]);
+  /* Eixos sub */
+  makeNode('eixo1', 168, 318, 30, 'ndg-gcs', null, [{ t:'Eixo 1', size:9 }, { t:'Epistemologia', size:7.5 }]);
+  makeNode('eixo2', 138, 430, 30, 'ndg-gcs', null, [{ t:'Eixo 2', size:9 }, { t:'Psicopatologia', size:7.5 }]);
+  makeNode('eixo3', 178, 545, 30, 'ndg-gcs', null, [{ t:'Eixo 3', size:9 }, { t:'Psicoterapias', size:7.5 }]);
+
+  /* ── PANEL UPDATE ── */
+  function updatePanel(key) {
+    var d = ND[key]; if (!d) return;
+    var panel = document.getElementById('nexus-dgm-panel');
+    panel.style.setProperty('--ndg-accent', d.accent);
+
+    document.getElementById('ndp-tag').style.color = d.accent;
+    document.getElementById('ndp-bar').style.background = d.accent;
+    document.getElementById('ndp-tag').textContent   = d.tag;
+    document.getElementById('ndp-title').textContent = d.title;
+    document.getElementById('ndp-desc').textContent  = d.desc;
+    document.getElementById('ndp-body').innerHTML    = '<p>' + d.body + '</p>';
+
+    var list = document.getElementById('ndp-list');
+    list.innerHTML = '';
+    d.list.forEach(function(item) {
+      var li = document.createElement('li');
+      li.textContent = item;
+      li.querySelector = null;
+      list.appendChild(li);
+    });
+    document.getElementById('ndp-body').appendChild(list);
+
+    /* Reset li colors */
+    list.querySelectorAll('li').forEach(function(li) {
+      li.style.color = 'rgba(232,230,223,0.8)';
+    });
+
+    /* Active node highlight */
+    document.querySelectorAll('#nexus-dgm-svg .ndg-node').forEach(function(n) {
+      n.classList.remove('ndg-active');
+    });
+    var el = document.querySelector('#nexus-dgm-svg [data-node="' + key + '"]');
+    if (el) el.classList.add('ndg-active');
+  }
+
+})();
+</script>
